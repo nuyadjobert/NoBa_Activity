@@ -188,10 +188,6 @@ class OrderItemController extends Controller
         ]);
     }
 
-    /**
-     * Remove an item from a pending order.
-     * DELETE /api/pos/orders/{orderId}/items/{itemId}
-     */
     public function destroy(Request $request, $orderId, $itemId): JsonResponse
     {
         $order = Order::where('user_id', $request->user()->id)->find($orderId);

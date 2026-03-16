@@ -28,33 +28,10 @@ Route::prefix('auth')->name('auth.')->group(function () {
 
 });
 
-
-/*
-|--------------------------------------------------------------------------
-| PROTECTED ROUTES
-|--------------------------------------------------------------------------
-| Everything here requires auth token
-*/
 Route::middleware('auth:sanctum')->group(function () {
-
-    /*
-    |---------------------------
-    | AUTH (Protected)
-    |---------------------------
-    */
-    // Route::prefix('auth')->name('auth.')->group(function () {
-
         Route::post('logout', [AuthController::class, 'logout'])->name('logout');
         Route::get('me',      [AuthController::class, 'me'])->name('me');
 
-    // });
-
-
-    /*
-    |---------------------------
-    | POS MODULE
-    |---------------------------
-    */
     Route::prefix('pos')->name('pos.')->group(function () {
 
         // Categories

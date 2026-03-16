@@ -11,21 +11,21 @@ use Illuminate\Support\Facades\DB;
 class OrderController extends Controller
 {
     public function index(Request $request): JsonResponse
-    {
-        $query = Order::with(['user', 'orderItems.product'])
-            ->forUser($request->user()->id);
+{
+    $query = Order::with(['user', 'orderItems.product'])
+        ->forUser($request->user()->id);
 
-        if ($request->has('status')) {
-            $query->byStatus($request->status);
-        }
-
-        $orders = $query->latest()->paginate($request->get('per_page', 15));
-
-        return response()->json([
-            'success' => true,
-            'data'    => $orders,
-        ]);
+    if ($request->has('status')) {
+        $query->byStatus($request->status);
     }
+
+    $orders = $query->latest()->get();
+
+    return response()->json([
+        'success' => true,
+        'data'    => $orders,
+    ]);
+}
 
     public function show(Request $request, $id): JsonResponse
     {
