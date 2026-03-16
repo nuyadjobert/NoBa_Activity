@@ -71,15 +71,16 @@ class AuthController extends Controller
         ]);
     }
 
-    public function logout(Request $request): JsonResponse
-    {
-        $request->user()->currentAccessToken()->delete();
+   public function logout(Request $request): JsonResponse
+{
+    // Delete only the current token (best practice)
+    $request->user()->currentAccessToken()->delete();
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Logged out successfully.',
-        ]);
-    }
+    return response()->json([
+        'success' => true,
+        'message' => 'Logged out successfully.',
+    ]);
+}
 
     public function me(Request $request): JsonResponse
     {
